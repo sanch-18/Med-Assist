@@ -1,0 +1,96 @@
+{% extends "base_medpred.html" %}
+
+{% load static %}
+
+{% block title %}
+    MedPred | Breast-Cancer
+{% endblock %}
+
+{% block content %}
+
+<link rel="stylesheet" href="{% static 'medpred/Cancer.css' %}">
+<link rel="stylesheet" href="{% static 'medpred/Home.css' %}">
+
+
+<body>
+    {% include 'Header_medpred.html' %}
+    <form action="/medpred/cancer-result/" method="post" id="form-id" class="forms">
+        {% csrf_token %}
+        <h1>Enter your Details</h1>
+        <div class="elements row mb-3">
+            <label for="colFormLabel" class="col-sm-2 col-form-label">Enter Texture mean:</label>
+            <div class="col-sm-10">
+                <input name="texture_mean" type="number" class="form-control" id="colFormLabel"
+                    placeholder="Mean Texture" min="9.71" max="39.28" step="0.000001" required />
+            </div>
+        </div>
+        <div class="elements row mb-3">
+            <label for="colFormLabel" class="col-sm-2 col-form-label">Enter Cell Compactness:</label>
+            <div class="col-sm-10">
+                <input name="cell_compactness" type="number" class="form-control" id="colFormLabel"
+                    placeholder="Compactness" min="0.002" max="0.135" step="0.000001" required />
+            </div>
+        </div>
+        <div class="elements row mb-3">
+            <label for="colFormLabel" class="col-sm-2 col-form-label">Enter Worst Cells Texture Rate(gray-scale
+                values):</label>
+            <div class="col-sm-10">
+                <input name="worst_cell_texture_rate" type="number" class="form-control" id="colFormLabel"
+                    placeholder="Worst Texture" min="12.02" max="49.54" step="0.000001" required />
+            </div>
+        </div>
+        <div class="elements row mb-3">
+            <label for="colFormLabel" class="col-sm-2 col-form-label">Enter Worst Cell Area Rate:</label>
+            <div class="col-sm-10">
+                <input name="worst_cell_area_rate" type="number" class="form-control" id="colFormLabel"
+                    placeholder="Worst Area" min="185.2" max="4254.00" step="0.000001" required />
+            </div>
+        </div>
+        <div class="elements row mb-3">
+            <label for="colFormLabel" class="col-sm-2 col-form-label">Enter Worst Cell Smoothness Rate:</label>
+            <div class="col-sm-10">
+                <input name="worst_cell_smooth_rate" type="number" class="form-control" id="colFormLabel"
+                    placeholder="Worst Smoothness" min="0.07" max="0.22" step="0.000001" required />
+            </div>
+        </div>
+        <div class="elements row mb-3">
+            <label for="colFormLabel" class="col-sm-2 col-form-label">Enter Worst Cell Concavity(severity of concave
+                portions of the contour):</label>
+            <div class="col-sm-10">
+                <input name="worst_cell_concavity" type="number" class="form-control" id="colFormLabel"
+                    placeholder="Worst Concavity" min="0.00" max="1.25" step="0.000001" required />
+            </div>
+        </div>
+        <div class="elements row mb-3">
+            <label for="colFormLabel" class="col-sm-2 col-form-label">Enter Worst Concave points'(number of concave
+                portions of the contour):</label>
+            <div class="col-sm-10">
+                <input name="worst_concave_points" type="number" class="form-control" id="colFormLabel"
+                    placeholder="Worst concave points" min="0.00" max="0.29" step="0.000001" required />
+            </div>
+        </div>
+        <div class="elements row mb-3">
+            <label for="colFormLabel" class="col-sm-2 col-form-label">Enter Normal/Mean Cell Area Rate:</label>
+            <div class="col-sm-10">
+                <input name="mean_cell_area_rate" type="number" class="form-control" id="colFormLabel"
+                    placeholder="Mean Area" min="6.80" max="542.20" step="0.000001" required />
+            </div>
+        </div>
+
+        <div class="submit">
+            <button type="submit" class="btn btn-success btn-md download-button">Submit and
+                see your results</button>
+        </div>
+    </form>
+    <div class="advice">
+        <img src="{% static 'medpred/doctor-examining-patient-clinic-illustrated_23-2148856559.jpg' %}" alt="">
+        <img class="doctor" src="{% static 'medpred/doctor-help.jpg' %}" alt="Ask for help">
+        <h2 class="examining">To better serve you, we highly advice you to accurately fill the form fields and seek the
+            help of doctors when needed</h2>
+    </div>
+    
+  {% include 'Footer_medpred.html' %}
+
+</body>
+
+{% endblock content %}

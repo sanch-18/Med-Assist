@@ -1,0 +1,107 @@
+{% extends "base_medpred.html" %}
+
+{% load static %}
+
+
+{% block title %}
+  MedPred | Covid
+{% endblock %}
+
+{% block content %}
+
+<link rel="stylesheet" href="{% static 'medpred/covid.css' %}">
+<link rel="stylesheet" href="{% static 'medpred/Home.css' %}">
+
+<body>
+  {% include 'Header_medpred.html' %}
+
+  <form method="post" action="/medpred/covid-result/" class="forms">
+    {% csrf_token %}
+    <h1>Enter your Details</h1>
+    <p>Select your Gender:</p>
+    <div id="styled-select">
+      <select name="Gender" class="drop-box elements form-select" aria-label="Default select example" required>
+        <option value="0">Male</option>
+        <option value="1">Female</option>
+      </select>
+    </div>
+    <div class="elements row mb-3">
+      <label for="colFormLabel" class="col-sm-2 col-form-label">Enter your Age:</label>
+      <div class="col-sm-10">
+        <input name="age" type="number" class="form-control" id="colFormLabel" placeholder="age" min="0" max="95"
+          step="1" required />
+      </div>
+    </div>
+    <p>Do you have fever:</p>
+    <div id="styled-select">
+      <select name="fever" class="drop-box elements form-select" aria-label="Default select example" required>
+        <option value="1">Yes</option>
+        <option value="0">No</option>
+      </select>
+    </div>
+    <p>Do you have cough:</p>
+    <div id="styled-select">
+      <select name="cough" class="drop-box elements form-select" aria-label="Default select example" required>
+        <option value="1">Yes</option>
+        <option value="0">No</option>
+      </select>
+    </div>
+    <p>Do you have runny nose:</p>
+    <div id="styled-select">
+      <select name="runnynose" class="drop-box elements form-select" aria-label="Default select example" required>
+        <option value="1">Yes</option>
+        <option value="0">No</option>
+      </select>
+    </div>
+    <p>Do you have Muscle soreness:</p>
+    <div id="styled-select">
+      <select name="musclesore" class="drop-box elements form-select" aria-label="Default select example" required>
+        <option value="1">Yes</option>
+        <option value="0">No</option>
+      </select>
+    </div>
+    <p>Do you have Pneumonia:</p>
+    <div id="styled-select">
+      <select name="Pneumonia" class="drop-box elements form-select" aria-label="Default select example" required>
+        <option value="1">Yes</option>
+        <option value="0">No</option>
+      </select>
+    </div>
+    <p>Do you have Diarrhea:</p>
+    <div id="styled-select">
+      <select name="Diarrhea" class="drop-box elements form-select" aria-label="Default select example" required>
+        <option value="1">Yes</option>
+        <option value="0">No</option>
+      </select>
+    </div>
+    <p>Do you have Lung infection:</p>
+    <div id="styled-select">
+      <select name="Lung" class="drop-box elements form-select" aria-label="Default select example" required>
+        <option value="1">Yes</option>
+        <option value="0">No</option>
+      </select>
+    </div>
+    <p>Have you Travelled anywhere recently</p>
+    <div id="styled-select">
+      <select name="travel" class="drop-box elements form-select" aria-label="Default select example" required>
+        <option value="1">Yes</option>
+        <option value="0">No</option>
+      </select>
+    </div>
+    <div class="submit">
+      <button type="submit" class="btn btn-success btn-md download-button"><i class="fas fa-check"></i> Submit and see
+        your results</button>
+    </div>
+  </form>
+
+  <div class="advice">
+    <img src="{% static 'medpred/doctor-examining-patient-clinic-illustrated_23-2148856559.jpg' %}" alt="">
+    <img class="doctor" src="{% static 'medpred/doctor-help.jpg' %}" alt="Ask for help">
+    <h2 class="examining">To better serve you, we highly advice you to accurately fill the form fields and seek the help
+      of doctors when needed</h2>
+  </div>
+
+  {% include 'Footer_medpred.html' %}
+
+</body>
+{% endblock content %}

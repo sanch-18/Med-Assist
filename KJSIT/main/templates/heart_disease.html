@@ -1,0 +1,112 @@
+{% extends "base_medpred.html" %}
+
+{% load static %}
+
+{% block title %}
+  MedPred | Heart-Disease
+{% endblock %}
+
+{% block content %}
+
+
+<link rel="stylesheet" href="{% static 'medpred/heart_disease.css' %}">
+<link rel="stylesheet" href="{% static 'medpred/Home.css' %}">
+
+<body>
+    {% include 'Header_medpred.html' %}
+
+    <form method="post" action="/medpred/heart-disease-result/" id="form-id" class="forms">
+        {% csrf_token %}
+        <h1>Enter your Details</h1>
+        <div class="elements row mb-3">
+            <label for="colFormLabel" class="col-sm-2 col-form-label">Enter Your Age:</label>
+            <div class="col-sm-10">
+                <input name="age" type="number" class="form-control" id="colFormLabel" placeholder="Age" required />
+            </div>
+        </div>
+        <p>Select your Gender:</p>
+        <div id="styled-select">
+            <select name="Gender" class="drop-box elements form-select" aria-label="Default select example" required>
+                <option value="0">Male</option>
+                <option value="1">Female</option>
+            </select>
+        </div>
+        <p>Select the level of your chest pain:</p>
+        <div id="styled-select">
+            <select name="chestpain" class="drop-box elements form-select" aria-label="Default select example" required>
+                <option value="0">Normal</option>
+                <option value="1">Mild</option>
+                <option value="2">Moderate</option>
+                <option value="3">Severe</option>
+            </select>
+        </div>
+        <div class="give-top-margin elements row mb-3">
+            <label for="colFormLabel" class="col-sm-2 col-form-label">Enter resting blood pressure:</label>
+            <div class="col-sm-10">
+                <input name="Blood-Pressure" type="number" class="form-control" id="colFormLabel"
+                    placeholder="Resting BP" required>
+            </div>
+        </div>
+        <div class="elements row mb-3">
+            <label for="colFormLabel" class="col-sm-2 col-form-label">Enter serum cholesterol in mg/dl:</label>
+            <div class="col-sm-10">
+                <input name="cholesterol" type="number" class="form-control" id="colFormLabel"
+                    placeholder="serum cholesterol" required />
+            </div>
+        </div>
+        <div class="elements row mb-3">
+            <label for="colFormLabel" class="col-sm-2 col-form-label">Enter maximum heart rate achieved:</label>
+            <div class="col-sm-10">
+                <input name="heart-rate" type="number" class="form-control" id="colFormLabel"
+                    placeholder="max heart rate" required />
+            </div>
+        </div>
+        <div class="elements row mb-3">
+            <label for="colFormLabel" class="col-sm-2 col-form-label">Enter exercise induced angima:</label>
+            <div class="col-sm-10">
+                <input name="angina" type="number" class="form-control" id="colFormLabel" placeholder="induced angina"
+                    required />
+            </div>
+        </div>
+        <div class="elements row mb-3">
+            <label for="colFormLabel" class="col-sm-2 col-form-label">Enter exercise induced ST-segment depression
+                relative to rest:</label>
+            <div class="col-sm-10">
+                <input name="st" type="number" class="form-control" id="colFormLabel"
+                    placeholder="exercise-induced ST-segment" required />
+            </div>
+        </div>
+        <p>Select the number of major vessels colored by flourosopy:</p>
+        <div id="styled-select">
+            <select name="vessels" class="drop-box elements form-select" aria-label="Default select example" required>
+                <option value="0">0</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+            </select>
+        </div>
+        <p>Select thal defect if any:</p>
+        <div id="styled-select">
+            <select name="thal" class="drop-box elements form-select" aria-label="Default select example" required>
+                <option value="0">normal</option>
+                <option value="1">fixed defect</option>
+                <option value="2">reversible defect</option>
+            </select>
+        </div>
+
+        <div class="submit">
+            <button type="submit" class="btn btn-success btn-md download-button"><i class="fas fa-check"></i> Submit and
+                see your results</button>
+        </div>
+    </form>
+    <div class="advice">
+        <img src="{% static 'medpred/doctor-examining-patient-clinic-illustrated_23-2148856559.jpg' %}" alt="">
+        <img class="doctor" src="{% static 'medpred/doctor-help.jpg' %}" alt="Ask for help">
+        <h2 class="examining">To better serve you, we highly advice you to accurately fill the form fields and seek the
+            help of doctors when needed</h2>
+    </div>
+
+  {% include 'Footer_medpred.html' %}
+
+</body>
+{% endblock content %}

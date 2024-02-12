@@ -1,0 +1,59 @@
+{% extends "base_medpred.html" %}
+
+{% load static %}
+
+{% block title %}
+  MedPred | Contact
+{% endblock %}
+
+{% block content %}
+
+<link rel="stylesheet" href="{% static 'medpred/contact.css' %}">
+<link rel="stylesheet" href="{% static 'medpred/Home.css' %}">
+
+<body>
+  {% include 'Header_medpred.html' %}
+
+    <!-- TITLE AND CARDS -->
+
+    <div id="bg">
+      <div class="container-fluid">
+        <div class="row">
+          <h1>CONTACT US</h1>
+          <p>Feel free to reach out to us for any query</p>
+        </div> 
+
+        <!-- CARD -->
+        <div class="row">
+          <div class="col-12 col-lg-6 col-md-12 mx-auto">
+            <div class="card text-left" width="18rem">
+              <img src="{% static 'medpred/question.jpg' %}" class="card-img-top">
+              <div class="card-body">
+                <form action="/medpred/contact/" method="post">
+                  {% csrf_token %}
+                  <div class="form-group">
+                    <label for="input-name"><b>Name</b></label>
+                    <input type="text" class="form-control" name="name" id="input-name" placeholder="Enter name">
+                  </div>
+                  <div class="form-group">
+                    <label for="input-email"><b>Email</b></label>
+                    <input type="email" class="form-control" name="email" id="input-email" placeholder="Enter email">
+                  </div>
+                  <div class="form-group">
+                    <label for="text-area"><b>Query</b></label>
+                    <textarea class="form-control" name="query" id="text-area" rows="5"></textarea>
+                  </div>
+                  <button class="btn" type="submit">SUBMIT</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  {% include 'Footer_medpred.html' %}
+
+</body>
+
+{% endblock content %}

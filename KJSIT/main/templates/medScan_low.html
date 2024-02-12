@@ -1,0 +1,134 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MedScan</title>
+
+  <link rel="stylesheet" crossorigin href="{% static 'medScan_low_css/index-35QkwXAN.css' %}">
+</head>
+<body >
+    <!-- Navbar -->
+    <header class="bg-gradient-to-r from-cyan-500 to-blue-500">
+        <nav class="flex justify-between items-center w-[92%]  mx-auto">
+            <div class="text-2xl text-slate-100 my-2">
+                Med Assist
+            </div>
+            <div
+                class="nav-links duration-500 md:static absolute md:min-h-fit min-h-[60vh] left-0 top-[-100%] md:w-auto  w-full flex items-center px-5">
+                <ul class="flex md:flex-row flex-col md:items-center md:gap-[4vw] gap-8 text-white">
+                    <li>
+                        <a class="hover:text-gray-500 text-white font-bold" href="/medpred">MedPred</a>
+                    </li>
+                    <li>
+                        <a class="hover:text-gray-500 text-white font-bold" href="/medscan">MedScan</a>
+                    </li>
+                    <li>
+                        <a class="hover:text-gray-500 text-white font-bold" href="#">Dashboard</a>
+                    </li>
+                    <li>
+                        <a class="hover:text-gray-500 text-white font-bold" href="#">GeoMapper</a>
+                    </li>
+                    
+                </ul>
+            </div>
+            <div class="flex items-center gap-6">
+                <button class="bg-blue-900 text-white px-5 py-2 rounded-full hover:bg-[#87acec]">Login</button>
+                <ion-icon onclick="onToggleMenu(this)" name="menu" class="text-3xl cursor-pointer md:hidden text-black"></ion-icon>
+            </div>
+    </header>
+    <!-- Background image -->
+    <div class="bg-[url('/static/bg_img2.jpg')] bg-cover h-screen flex justify-center" id="bgimg">
+        
+        <form action="/medscan/result/" method="POST" class="flex justify-center">
+            {%csrf_token%}
+        <div class="mt-24 w-96 sm:72 rounded-xl backdrop-blur-xl h-5/6 pt-12 mr-5">
+            <div class="ml-10 text-white">
+                <p class="text-5xl mb-3">Select Symptoms</p>
+                
+                    <ul>
+                        <li><label for="itching" class="text-xl">Itching? </label><input type="radio" name="itching" value='1'>Yes <input type="radio" name="itching" value='0'>No</li>
+                        <li><label for="skin_rash" class="text-xl">Skin Rash? </label><input type="radio" name="skin_rash" value='1'>Yes <input type="radio" name="skin_rash" value='0'>No</li>
+                        <li><label for="continuous_sneezing" class="text-xl">Continuous Sneezing? </label><input type="radio" name="continuous_sneezing" value='1'>Yes <input type="radio" name="continuous_sneezing" value='0'>No</li>
+                        <li><label for="shivering" class="text-xl">Shivering? </label><input type="radio" name="shivering" value='1'>Yes <input type="radio" name="shivering" value='0'>No</li>
+                        <li><label for="chills" class="text-xl">Chills? </label><input type="radio" name="chills" value='1'>Yes <input type="radio" name="chills" value='0'>No</li>
+                        <li><label for="joint_pain" class="text-xl">Joint Pain? </label><input type="radio" name="joint_pain" value='1'>Yes <input type="radio" name="joint_pain" value='0'>No</li>
+                        <li><label for="cough" class="text-xl">Cough? </label><input type="radio" name="cough" value='1'>Yes <input type="radio" name="cough" value='0'>No</li>
+                        <li><label for="vomiting" class="text-xl">Vomiting? </label><input type="radio" name="vomiting" value='1'>Yes <input type="radio" name="vomiting" value='0'>No</li>
+                        <li><label for="headache" class="text-xl">Headache? </label><input type="radio" name="headache" value='1'>Yes <input type="radio" name="headache" value='0'>No</li>
+                        <li><label for="chest_pain" class="text-xl">Chest Pain? </label><input type="radio" name="chest_pain" value='1'>Yes <input type="radio" name="chest_pain" value='0'>No</li>
+                        <li><label for="breathlessness" class="text-xl">Breathlessness? </label><input type="radio" name="breathlessness" value='1'>Yes <input type="radio" name="breathlessness" value='0'>No</li>
+                        <li><label for="nausea" class="text-xl">Nausea? </label><input type="radio" name="nausea" value='1'>Yes <input type="radio" name="nausea" value='0'>No</li>
+                        <li><label for="diarrhoea" class="text-xl">Diarrhoea? </label><input type="radio" name="diarrhoea" value='1'>Yes <input type="radio" name="diarrhoea" value='0'>No</li>
+                        <li><label for="muscle_pain" class="text-xl">Muscle Pain? </label><input type="radio" name="muscle_pain" value='1'>Yes <input type="radio" name="muscle_pain" value='0'>No</li>
+                        <li><label for="sweating" class="text-xl">Sweating? </label><input type="radio" name="sweating" value='1'>Yes <input type="radio" name="sweating" value='0'>No</li>
+                    </ul>
+                    <button class="text-black rounded-full bg-white text-xl font-bold mt-4 px-7 py-2 click:bg-slate-200">Submit</button>
+                
+                <!-- <ul id="selecting" class="flex text-2xl justify-left flex-wrap">
+                    <li><button id="symp" class="">itching</button></li>
+                    <li><button id="symp" class="">skin_rash</button></li>
+                    <li><button id="symp" class="">continuous_sneezing</button></li>
+                    <li><button id="symp" class="">shivering</button></li>
+                    <li><button id="symp" class="">chills</button></li>
+                    <li><button id="symp" class="">joint_pain</button></li>
+                    <li><button id="symp" class="">cough</button></li>
+                    <li><button id="symp" class="">vomiting</button></li>
+                    <li><button id="symp" class="">headache</button></li>
+                    <li><button id="symp" class="">chest_pain</button></li>
+                    <li><button id="symp" class="">breathlessness</button></li>
+                    <li><button id="symp" class="">nausea</button></li>
+                    <li><button id="symp" class="">diarrhoea</button></li>
+                    <li><button id="symp" class="">muscle_pain</button></li>
+                    <li><button id="symp" class="">sweating</button></li>
+                </ul> -->
+            </div>
+        </div>
+    </form>
+    <footer class="white-section" id="footer">
+        <div class="container-fluid text-center">
+          <p>© Copyright 2024 Med Assist</p>
+        </div>
+    </footer>
+        <!-- Card -->
+        <!-- <div class="mt-24 w-2/5 sm:w-2/5 rounded-xl backdrop-blur-xl h-5/6 pt-12 ml-5">
+             Header 
+            <div class="ml-10 text-3xl text-white">
+                <p class="text-5xl mb-3">Selected Symptoms</p>
+                <ul id="selected" class="flex text-2xl justify-left flex-wrap">
+                    
+                </ul>
+            </div>
+             Content 
+            <div class="px-10 mt-5">
+            </div>
+        </div> -->
+    </div>
+    <script>
+        let sym=[];
+        let selected=document.querySelector('#selected');
+        let selecting=document.querySelector('#selecting');
+        selecting.addEventListener("click", function(event){        
+            let adding=document.createElement('li');
+            adding.innerText=event.target.innerText;
+            adding.setAttribute('id', 'symp');
+            selected.appendChild(adding);
+            sym.push(event.target.innerText);
+            event.target.remove();
+        })
+        selected.addEventListener("click", function(event){        
+            let adding=document.createElement('li');
+            adding.innerText=event.target.innerText;
+            adding.setAttribute('id', 'symp');
+            for(let i=0; i<sym.length; i++){
+                if(sym[i]==adding.innerText) sym.splice(i, 1);
+            }
+            selecting.appendChild(adding);
+            event.target.remove();
+        })
+                console.log(sym)
+    </script>
+</body>
+</html>

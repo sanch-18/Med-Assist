@@ -1,0 +1,116 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script defer src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+    crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+    crossorigin="anonymous"></script>
+  <title> MedPred | Test for diseases in the most effective way</title>
+</head>
+<link rel="stylesheet" href="{% static 'medpred/Home.css' %}">
+
+<body>
+
+  {% include 'Header_medpred.html' %}
+
+  <!-- TITLE AND CARDS -->
+
+  <div id="bg">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-lg-12">
+          <h1 class="big-heading" id="typewriter"></h1>
+          <script>
+            const words = ["WELCOME TO MedPred"];
+            let i = 0;
+            let j = 0;
+            let currentWord = "";
+            let isDeleting = false;
+
+            function type() {
+              currentWord = words[i];
+              document.getElementById("typewriter").textContent = currentWord.substring(0, j + 1);
+              j++;
+              setTimeout(type, 100);
+            }
+
+            type();
+          </script><br>
+        </div>
+      </div>
+
+      <div class="row" id="car">
+        <div class="col-12 col-lg-6 col-md-12 mx-auto mb-4 ">
+          <div class="card" id="card">
+            <img src="{% static 'medpred/heart.jpg' %}" class="card-img-top">
+            <div class="card-body">
+              <h5 class="card-title">Heart Disease</h5>
+              <p class="card-text">The term “heart disease” refers to several types of heart conditions.
+                Sometimes heart disease may be “silent” and not diagnosed until a person experiences signs or symptoms
+                of a heart attack, heart failure, or an arrhythmia</p>
+              <a href="/medpred/heart-disease" class="btn">TEST</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-12 col-lg-6 col-md126 mx-aut mb-4o">
+          <div class="card" id="card">
+            <img src="{% static 'medpred/covid.jpg' %}" class="card-img-top">
+            <div class="card-body">
+              <h5 class="card-title">Covid-19</h5>
+              <p class="card-text">COVID-19 is a highly contagious viral illness caused by the severe acute respiratory
+                syndrome coronavirus 2.
+                Symptoms of COVID-19 may include fever, cough, fatigue, loss of taste, muscle or body aches, sore
+                throat, etc.</p>
+              <a href="/medpred/covid" class="btn">TEST</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-12 col-lg-6 col-md126 mx-aut mb-4o">
+          <div class="card" id="card">
+            <img src="{% static 'medpred/cancer.jpg' %}" class="card-img-top">
+            <div class="card-body">
+              <h5 class="card-title">Breast Cancer</h5>
+              <p class="card-text">Breast cancer originates in the cells of the breast tissue. It occurs when the cells
+                in the breast grow uncontrollably and form a tumor.
+                Breast cancer can affect both men and women, but it is much more common in women.</p>
+              <a href="/medpred/cancer" class="btn">TEST</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-12 col-lg-6 col-md126 mx-aut mb-4o">
+          <div class="card" id="card">
+            <img src="{% static 'medpred/diabetes.jpg' %}" class="card-img-top">
+            <div class="card-body">
+              <h5 class="card-title">Diabetes</h5>
+              <p class="card-text">Diabetes mellitus, commonly referred to as diabetes,
+                is a chronic metabolic disorder that affects how your body uses glucose (sugar), the primary source of
+                energy for cells.
+                Diabetes can be type-1 (genetic) or type-2 (lifestyle factors).</p>
+              <a href="/medpred/diabetes" class="btn">TEST</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  {% include 'Footer_medpred.html' %}
+
+</body>
+
+</html>

@@ -1,0 +1,37 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+
+  <link rel="stylesheet" crossorigin href="{% static 'signup_css/style.css' %}">
+</head>
+<body >
+    <!-- Background image -->
+    <div class="bg-[url('/static/bg_img.jpg')] bg-cover h-screen flex justify-center" id="bgimg">
+        <!-- Card -->
+        <div class="mt-48 w-64 sm:w-96 rounded-xl backdrop-blur-xl h-3/5 pt-16">
+            <!-- Header -->
+            <div class="flex justify-center h-4 w-rounded-t-6xl text-5xl font-roboto text-slate-100">SIGN UP</div>
+            <!-- Content -->
+            <div class="px-10 my-4">
+                <form method="POST" action="" class="pt-2">
+                    {% csrf_token %}
+
+                    <input name="fname" placeholder="First Name" class="mt-10 bg-transparent placeholder-white text-white text-xl focus:border-none">
+                    <input name="lname" placeholder="Last Name" class="mt-5 bg-transparent placeholder-white text-white text-xl focus:border-none">
+                    <input name="username" placeholder="Email" class="mt-5 bg-transparent placeholder-white text-white text-xl focus:border-none">
+                    <input name="email" placeholder="Username" class="mt-5 bg-transparent placeholder-white text-white text-xl focus:border-none"><br>
+                    <input name="pass1" placeholder="Password" type="password" class="mt-5 bg-transparent placeholder-white text-white text-xl focus:border-none"><br>
+                    <div class="flex justify-center">
+                        <button class="text-black bg-slate-100 font-bold text-xl mt-10 rounded-full px-5 py-1 hover:px-7">Sign Up </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

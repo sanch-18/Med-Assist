@@ -1,0 +1,96 @@
+{% extends "base_medpred.html" %}
+
+{% load static %}
+
+{% block title %}
+MedPred | Diabetes
+{% endblock %}
+
+{% block content %}
+
+<link rel="stylesheet" href="{% static 'medpred/Diabetes.css' %}">
+<link rel="stylesheet" href="{% static 'medpred/Home.css' %}">
+
+<body>
+  {% include 'Header_medpred.html' %}
+
+  <form action="/medpred/diabetes-result/" method="post" class="forms">
+    {% csrf_token %}
+    <h1>Enter your Details</h1>
+    <p>Select your Gender:</p>
+    <div id="styled-select">
+      <select name="gender" type="number" class="drop-box elements form-select" aria-label="Default select example"
+        required>
+        = <option value="1">Male</option>
+        <option value="0">Female</option>
+      </select>
+    </div>
+    <div class="elements row mb-3">
+      <label for="colFormLabel" class="col-sm-2 col-form-label">Enter Your Age:</label>
+      <div class="col-sm-10">
+        <input name="age" type="number" class="form-control" id="colFormLabel" placeholder="Age" required />
+      </div>
+    </div>
+    <p>Do you have Hypertension?:</p>
+    <div id="styled-select">
+      <select name="hypertension" type="number" class="drop-box elements form-select"
+        aria-label="Default select example" required>
+        <option value="1">Yes</option>
+        <option value="0">No</option>
+      </select>
+    </div>
+    <p>Do you have any Heart Disease?</p>
+    <div id="styled-select">
+      <select name="heart_disease" type="number" class="drop-box elements form-select"
+        aria-label="Default select example" required>
+        <option value="1">Yes</option>
+        <option value="0">No</option>
+      </select>
+    </div>
+    <p>Your Smoking Cycle:</p>
+    <div id="styled-select">
+      <select name="smoking" type="number" class="drop-box elements form-select" aria-label="Default select example"
+        required>
+        <option value="0">Never Have</option>
+        <option value="1">Currently smoking </option>
+        <option value="2">Former Smoker</option>
+      </select>
+    </div>
+    <div class="elements row mb-3">
+      <label for="colFormLabel" class="col-sm-2 col-form-label">Recent BMI levels:</label>
+      <div class="col-sm-10">
+        <input name="bmi" type="number" step="0.01" class="form-control" id="colFormLabel" placeholder="BMI" required />
+      </div>
+    </div>
+    <div class="elements row mb-3">
+      <label for="colFormLabel" class="col-sm-2 col-form-label">Percentage HbA1c Level:</label>
+      <div class="col-sm-10">
+        <input name="hba" type="number" step="0.01" class="form-control" id="colFormLabel" placeholder="HbA1c%"
+          required />
+      </div>
+    </div>
+    <div class="elements row mb-3">
+      <label for="colFormLabel" class="col-sm-2 col-form-label">What's your Blood Glucose Level(mg/dL):</label>
+      <div class="col-sm-10">
+        <input name="glucose" type="number" class="form-control" id="colFormLabel" placeholder="Blood Glucose level"
+          required />
+      </div>
+    </div>
+    <div class="submit">
+      <button type="submit" class="btn btn-success btn-md download-button"><i class="fas fa-check"></i> Submit and see
+        your results</button>
+    </div>
+  </form>
+
+  <div class="advice">
+    <img src="{% static 'medpred/doctor-examining-patient-clinic-illustrated_23-2148856559.jpg' %}" alt="">
+    <img class="doctor" src="{% static 'medpred/doctor-help.jpg' %}" alt="Ask for help">
+    <h2 class="examining">To better serve you, we highly advice you to accurately fill the form fields and seek the help
+      of doctors when needed</h2>
+  </div>
+
+  {% include 'Footer_medpred.html' %}
+
+</body>
+
+{% endblock content %}

@@ -1,0 +1,80 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+
+  <link rel="stylesheet" crossorigin href="{% static 'medScan_res_css/index-35QkwXAN.css' %}">
+</head>
+<body >
+    <!-- Navbar -->
+    <header class="bg-gradient-to-r from-cyan-500 to-blue-500">
+        <nav class="flex justify-between items-center w-[92%]  mx-auto">
+            <a class="hover:text-gray-500 text-white font-bold" href="/">MedAssist</a>
+
+            <div
+                class="nav-links duration-500 md:static absolute md:min-h-fit min-h-[60vh] left-0 top-[-100%] md:w-auto  w-full flex items-center px-5">
+                <ul class="flex md:flex-row flex-col md:items-center md:gap-[4vw] gap-8 text-white">
+                    <li>
+                        <a class="hover:text-gray-500 text-white font-bold" href="/medpred/">MedPred</a>
+                    </li>
+                    <li>
+                        <a class="hover:text-gray-500 text-white font-bold" href="/medscan/">MedScan</a>
+                    </li>
+                    <li>
+                        <a class="hover:text-gray-500 text-white font-bold" href="#">Dashboard</a>
+                    </li>
+                    <li>
+                        <a class="hover:text-gray-500 text-white font-bold" href="#">GeoMapper</a>
+                    </li>
+                    <li>
+                        <a class="hover:text-gray-500 text-white font-bold" href="#">About Us</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="flex items-center gap-6">
+                <button class="bg-blue-900 text-white px-5 py-2 rounded-full hover:bg-[#93b6f2]">Login</button>
+                <ion-icon onclick="onToggleMenu(this)" name="menu" class="text-3xl cursor-pointer md:hidden text-black"></ion-icon>
+            </div>
+    </header>
+    <!-- Background image -->
+    <div class="bg-[url('/static/bg_img2.jpg')] bg-cover h-screen flex justify-center" id="bgimg">
+        
+
+
+  
+        <!-- Card -->
+        <div class="mt-32 w-96 sm:w-4/5 rounded-xl backdrop-blur-xl h-5/6 pt-16">
+            <!-- Header -->
+            <div class="text-center w-rounded-t-6xl text-7xl font-roboto text-slate-100 px-10"> 
+                <h1 id="typewriter" class="font-bold"></h1>
+                <script>
+                    const words = ["Your MedScan Results"];
+                    let i = 0;
+                    let j = 0;
+                    let currentWord = "";
+                    let isDeleting = false;
+
+                    function type() {
+                    currentWord = words[i];
+                        document.getElementById("typewriter").textContent = currentWord.substring(0, j+1);
+                        j++;
+                        setTimeout(type, 100);
+                    }
+                            
+                    type();
+                </script>
+            </div>
+            <!-- Content -->
+                <div class="px-10 mt-5 text-center">
+                    <p id="content1" class="text-2xl font-roboto text-slate-100">{{diseases_str}}</p>
+                    <p id="content1" class="text-2xl font-roboto text-slate-100">{{symptoms_str}}</p>
+                    <p id="content1" class="text-2xl font-roboto text-slate-100"> {{treatments_str}}</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
