@@ -19,12 +19,12 @@
             <div class="flex justify-center h-4 w-rounded-t-6xl text-5xl font-roboto text-slate-100">LOGIN</div>
             <!-- Content -->
             <div class="px-10 my-4">
-                <form action="/medpred/" method="POST" class="pt-2">
+                <form action="/login/" method="POST" class="pt-2">
                     {% csrf_token %}
-                    <input name="loginusername" placeholder="Username" class="mt-10 bg-transparent placeholder-white text-white text-xl focus:border-none"><br>
-                    <input name="loginpass" placeholder="Password" type="password" class="mt-10 bg-transparent placeholder-white text-white text-xl focus:border-none"><br>
+                    <div class="form-group"><input name="loginusername" id="loginusername" placeholder="Username" class="form-control mt-10 bg-transparent placeholder-white text-white text-xl focus:border-none"></div><br>
+                    <div class="form-group"><input name="loginpass" id="loginpass" placeholder="Password" type="password" class="form-control mt-10 bg-transparent placeholder-white text-white text-xl focus:border-none"></div><br>
                     <div class="flex justify-center">
-                        <button class="text-black bg-slate-100 font-bold text-xl mt-6 rounded-full px-5 py-1 hover:px-7">Login</button>
+                        <button type="submit" class="text-black bg-slate-100 font-bold text-xl mt-6 rounded-full px-5 py-1 hover:px-7">Login</button>
                     </div>
                 </form>
                 <div class="flex justify-center">
