@@ -25,11 +25,11 @@ def home(request):
 # Create your views here.
 def handlesignup(request):
     if request.method=='POST':
-        fname=request.POST['fname']
-        lname=request.POST['lname']
-        username=request.POST['username']
-        email=request.POST['email']
-        pass1=request.POST['pass1']
+        fname=request.POST.get('fname')
+        lname=request.POST.get('lname')
+        username=request.POST.get('username')
+        email=request.POST.get('email')
+        pass1=request.POST.get('pass1')
         # bio=request.POST['bio']
         
         # website=request.POST['website']
@@ -55,7 +55,7 @@ def userlogin(request):
             login(request, user)
             print("user is logged in")
             messages.success(request, "Logged In!")
-            return redirect("login")
+            return redirect("intro")
         else:
             print("kjpjjoio")
             messages.error(request, "Invalid Credentials, please try again")
@@ -64,10 +64,12 @@ def userlogin(request):
     return render(request, 'login.html')
 
 def userlogout(request):
+    user=request.user
+    print(f"{user} logged in is logged out")
     logout(request)
     print("oioiiooioioio")
     messages.success(request, "Successfully logged out!")
-    return redirect("login")
+    return redirect("intro")
 
 def about(request):
     return render(request, 'about.html')

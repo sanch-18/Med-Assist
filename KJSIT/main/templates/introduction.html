@@ -20,6 +20,8 @@
             <div
                 class="nav-links duration-500 md:static absolute md:min-h-fit min-h-[60vh] left-0 top-[-100%] md:w-auto w-full flex items-center px-5">
                 <ul class="flex md:flex-row flex-col md:items-center md:gap-[4vw] gap-8 text-white">
+                    {% if user.is_authenticated %}
+
                     <li>
                         <a class="hover:text-gray-500 text-white font-bold" href="/medpred">MedPred</a>
                     </li>
@@ -31,15 +33,22 @@
                     </li>
                     <li>
                         <a class="hover:text-gray-500 text-white font-bold" href="#">GeoMapper</a>
+                        <a href="/logout"
+                            class="button bg-blue-900 text-white px-5 py-2 rounded-full hover:bg-[#87acec]">Logout</a>
                     </li>
+                    {% else %}
+                    <div class="flex items-center gap-6">
+                        <a href="/login"
+                            class="button bg-blue-900 text-white px-5 py-2 rounded-full hover:bg-[#87acec]">Login</a>
+                            <a href="/signup"
+                            class="button bg-blue-900 text-white px-5 py-2 rounded-full hover:bg-[#87acec]">Signup</a>
+                            
+                        <ion-icon onclick="onToggleMenu(this)" name="menu"
+                            class="text-3xl cursor-pointer md:hidden text-black"></ion-icon>
+                    </div>
+                    {% endif %}
 
                 </ul>
-            </div>
-            <div class="flex items-center gap-6">
-                <a href="/login"
-                    class="button bg-blue-900 text-white px-5 py-2 rounded-full hover:bg-[#87acec]">Login</a>
-                <ion-icon onclick="onToggleMenu(this)" name="menu"
-                    class="text-3xl cursor-pointer md:hidden text-black"></ion-icon>
             </div>
     </header>
     <!-- Background image -->

@@ -8,8 +8,52 @@
     <title>MedScan</title>
 
   <link rel="stylesheet" crossorigin href="{% static 'medScan_low_css/index-35QkwXAN.css' %}">
+  <style>
+    .error404 {
+        font-family: 'Arial', sans-serif;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        background-color: #f8f9fa;
+    }
+
+    .container {
+        text-align: center;
+    }
+
+    .error-code {
+        font-size: 120px;
+        color: #dc3545;
+        margin-bottom: 10px;
+    }
+
+    .error-message {
+        font-size: 24px;
+        color: #6c757d;
+        margin-bottom: 20px;
+    }
+
+    .back-home {
+        text-decoration: none;
+        font-size: 18px;
+        color: #007bff;
+        padding: 10px 20px;
+        border: 2px solid #007bff;
+        border-radius: 5px;
+        transition: background-color 0.3s, color 0.3s;
+    }
+
+    .back-home:hover {
+        background-color: #007bff;
+        color: #ffffff;
+    }
+</style>
 </head>
 <body >
+    {% if user.is_authenticated %}
     <!-- Navbar -->
     <header class="bg-gradient-to-r from-cyan-500 to-blue-500">
         <nav class="flex justify-between items-center w-[92%]  mx-auto">
@@ -35,7 +79,7 @@
                 </ul>
             </div>
             <div class="flex items-center gap-6">
-                <button class="bg-blue-900 text-white px-5 py-2 rounded-full hover:bg-[#87acec]">Login</button>
+                <a class="button bg-blue-900 text-white px-5 py-2 rounded-full hover:bg-[#87acec]" href="/logout/">Logout</a>
                 <ion-icon onclick="onToggleMenu(this)" name="menu" class="text-3xl cursor-pointer md:hidden text-black"></ion-icon>
             </div>
     </header>
@@ -130,5 +174,13 @@
         })
                 console.log(sym)
     </script>
+    {%else%}
+    <div class="container error404">
+        <div class="error-code">404</div>
+        <div class="error-message">Page Not Found</div>
+        <p>Sorry, the page you are looking for might be in another castle.</p>
+        <a href="/" class="back-home">Back to Home</a>
+    </div>
+    {%endif%}
 </body>
 </html>
