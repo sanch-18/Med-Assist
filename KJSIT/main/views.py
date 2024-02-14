@@ -239,7 +239,7 @@ def medscresults(request):
     diseases = ['Fungal infection', 'Allergy', 'Drug Reaction', 'AIDS', 'Migraine',
         'Malaria', 'Chicken pox', 'Dengue', 'Typhoid', 'Hepatitis A',
         'Hepatitis B', 'Common Cold', 'Pneumonia', 'Arthritis', 'Acne',
-        'Impetigo']
+        'Impetigo', 'hepatitis A']
 
 # Symptoms list
     symptoms = [
@@ -258,7 +258,8 @@ def medscresults(request):
         ['Cough', 'fever', 'difficulty breathing', 'chest pain', 'fatigue'],
         ['Joint pain', 'swelling', 'stiffness', 'redness', 'reduced range of motion'],
         ['Pimples', 'blackheads', 'whiteheads', 'redness', 'inflammation'],
-        ['Red sores', 'blisters', 'itching', 'fluid-filled blisters', 'honey-colored crusts']
+        ['Red sores', 'blisters', 'itching', 'fluid-filled blisters', 'honey-colored crusts'],
+        ['','','']
     ]
 
 # Treatment list
@@ -278,25 +279,102 @@ def medscresults(request):
         ['Antibiotics', 'rest', 'oxygen therapy', 'supportive care'],
         ['Medications', 'physical therapy', 'lifestyle changes', 'joint injections'],
         ['Topical and oral medications', 'skincare', 'lifestyle changes'],
-        ['Antibiotics', 'good hygiene', 'topical antiseptics']]
+        ['Antibiotics', 'good hygiene', 'topical antiseptics'],
+        ['','','']]
 
     if request.method=='POST':
-        itching = int(request.POST['itching'])
-        skin_rash = int(request.POST['skin_rash'])
-        continuous_sneezing = int(request.POST['continuous_sneezing'])
-        shivering = int(request.POST['shivering'])
-        joint_pain = int(request.POST['joint_pain'])
-        vomiting = int(request.POST['vomiting'])
-        cough = int(request.POST['cough'])
-        breathlessness = int(request.POST['breathlessness'])
-        sweating = int(request.POST['sweating'])
-        headache = int(request.POST['headache'])
-        nausea = int(request.POST['nausea'])
-        chills = int(request.POST['chills'])
-        diarrhoea = int(request.POST['diarrhoea'])
-        chest_pain = int(request.POST['chest_pain'])
-        muscle_pain = int(request.POST['muscle_pain'])
-        print(itching, type(itching))
+        your_list = request.POST.get('symptoms')
+        print(your_list)
+        itching = 0
+        skin_rash = 0
+        continuous_sneezing=0
+        shivering = 0
+        joint_pain = 0
+        vomiting = 0
+        cough = 0
+        breathlessness=0
+        sweating = 0
+        headache = 0
+        nausea = 0
+        chills = 0
+        diarrhoea = 0
+        chest_pain = 0
+        muscle_pain =0
+        stri=''
+        parent_count=0
+        for symptom in your_list:
+            if symptom=='"':
+                parent_count+=1
+                print(parent_count)
+                if parent_count%2==0:
+
+                    print(f"{stri} is the symptom")
+                # Set variables based on the keys where the value is 1
+                    if stri == 'itching':
+                        itching = 1
+                    if stri == 'skin_rash':
+                        skin_rash = 1
+                    if stri == 'continuous_sneezing':
+                        continuous_sneezing = 1
+                    if stri == 'shivering':
+                        shivering = 1
+                    if stri == 'joint_pain':
+                        joint_pain = 1
+                    if stri == 'vomiting':
+                        vomiting = 1
+                    if stri == 'cough':
+                        cough = 1
+                    if stri == 'breathlessness':
+                        breathlessness = 1
+                    if stri == 'sweating':
+                        sweating = 1
+                    if stri == 'headache':
+                        headache = 1
+                    if stri == 'nausea':
+                        nausea = 1
+                    if stri == 'chills':
+                        chills = 1
+                    if stri == 'diarrhoea':
+                        diarrhoea = 1
+                    if stri == 'chest_pain':
+                        chest_pain = 1
+                    if stri == 'muscle_pain':
+                        muscle_pain = 1
+                    stri=''
+            elif parent_count%2==1:
+                stri+=symptom
+        print(f'itching: {itching}')
+        print(f'skin_rash: {skin_rash}')
+        print(f'continuous_sneezing: {continuous_sneezing}')
+        print(f'shivering: {shivering}')
+        print(f'joint_pain: {joint_pain}')
+        print(f'vomiting: {vomiting}')
+        print(f'cough: {cough}')
+        print(f'breathlessness: {breathlessness}')
+        print(f'sweating: {sweating}')
+        print(f'headache: {headache}')
+        print(f'nausea: {nausea}')
+        print(f'chills: {chills}')
+        print(f'diarrhoea: {diarrhoea}')
+        print(f'chest_pain: {chest_pain}')
+        print(f'muscle_pain: {muscle_pain}')
+
+        # itching = int(request.POST['itching'])
+        # skin_rash = int(request.POST['skin_rash'])
+        # continuous_sneezing = int(request.POST['continuous_sneezing'])
+        # shivering = int(request.POST['shivering'])
+        # joint_pain = int(request.POST['joint_pain'])
+        # vomiting = int(request.POST['vomiting'])
+        # cough = int(request.POST['cough'])
+        # breathlessness = int(request.POST['breathlessness'])
+        # sweating = int(request.POST['sweating'])
+        # headache = int(request.POST['headache'])
+        # nausea = int(request.POST['nausea'])
+        # chills = int(request.POST['chills'])
+        # diarrhoea = int(request.POST['diarrhoea'])
+        # chest_pain = int(request.POST['chest_pain'])
+        # muscle_pain = int(request.POST['muscle_pain'])
+        # print(itching, type(itching))
         features = [itching, skin_rash, 0, continuous_sneezing, shivering, chills, joint_pain, 0, 0, 0, 0, vomiting, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, cough, 0, 0, breathlessness, sweating, 0, 0, headache, 0, 0, nausea, 0, 0, 0, 0, 0, diarrhoea, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, chest_pain, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, muscle_pain, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
         y_pred = low_end_model.predict([features])[0]
         index = diseases.index(y_pred)
