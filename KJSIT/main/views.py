@@ -6,6 +6,7 @@ from joblib import load
 
 from .models import Person, Contact_info
 
+
 covid_model = load('./main/Models/Covid.joblib')
 heart_disease_model=load('./main/Models/Heart-Disease.joblib')
 diabetes_model=load('./main/Models/Diabetes.joblib')
