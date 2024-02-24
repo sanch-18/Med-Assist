@@ -3,7 +3,7 @@
 {% load static %}
 
 {% block title %}
-    MedPred | Breast-Cancer
+MedPred | Breast-Cancer
 {% endblock %}
 
 {% block content %}
@@ -15,6 +15,7 @@
 
 
 <body>
+    {% if user.is_authenticated %}
     {% include 'Header_medpred.html' %}
     <form action="/medpred/cancer-result/" method="post" id="form-id" class="forms">
         {% csrf_token %}
@@ -90,8 +91,11 @@
         <h2 class="examining">To better serve you, we highly advice you to accurately fill the form fields and seek the
             help of doctors when needed</h2>
     </div>
-    
-  {% include 'Footer_medpred.html' %}
+
+    {% include 'Footer_medpred.html' %}
+    {%else%}
+    {% include 'error_message.html' %}
+    {%endif%}
 
 </body>
 

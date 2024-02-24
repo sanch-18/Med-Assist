@@ -1,103 +1,36 @@
+{% extends "base_medpred.html" %}
+
 {% load static %}
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MedScan</title>
+{% block title %}
+MedPred | Test for diseases in the most effective way
+{% endblock %}
 
-  <link rel="stylesheet" crossorigin href="{% static 'medScan_low_css/index-35QkwXAN.css' %}">
-  <style>
-    .error404 {
-        font-family: 'Arial', sans-serif;
-        margin: 0;
-        padding: 0;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        height: 100vh;
-        background-color: #f8f9fa;
-    }
+{% block content %}
 
-    .container {
-        text-align: center;
-    }
+<link rel="stylesheet" href="{% static 'medpred/Header.css' %}">
+<link rel="stylesheet" href="{% static 'medScan_low_css\index-35QkwXAN.css' %}">
+<link rel="stylesheet" href="{% static 'medpred/Footer.css' %}">
 
-    .error-code {
-        font-size: 120px;
-        color: #dc3545;
-        margin-bottom: 10px;
-    }
-
-    .error-message {
-        font-size: 24px;
-        color: #6c757d;
-        margin-bottom: 20px;
-    }
-
-    .back-home {
-        text-decoration: none;
-        font-size: 18px;
-        color: #007bff;
-        padding: 10px 20px;
-        border: 2px solid #007bff;
-        border-radius: 5px;
-        transition: background-color 0.3s, color 0.3s;
-    }
-
-    .back-home:hover {
-        background-color: #007bff;
-        color: #ffffff;
-    }
-</style>
-</head>
-<body >
-    {% if user.is_authenticated %}
+<body>
     <!-- Navbar -->
-    <header class="bg-gradient-to-r from-cyan-500 to-blue-500">
-        <nav class="flex justify-between items-center w-[92%]  mx-auto">
-            <div class="text-2xl text-slate-100 my-2">
-                Med Assist
-            </div>
-            <div
-                class="nav-links duration-500 md:static absolute md:min-h-fit min-h-[60vh] left-0 top-[-100%] md:w-auto  w-full flex items-center px-5">
-                <ul class="flex md:flex-row flex-col md:items-center md:gap-[4vw] gap-8 text-white">
-                    <li>
-                        <a class="hover:text-gray-500 text-white font-bold" href="/medpred">MedPred</a>
-                    </li>
-                    <li>
-                        <a class="hover:text-gray-500 text-white font-bold" href="/medscan">MedScan</a>
-                    </li>
-                    <li>
-                        <a class="hover:text-gray-500 text-white font-bold" href="#">Dashboard</a>
-                    </li>
-                    <li>
-                        <a class="hover:text-gray-500 text-white font-bold" href="#">GeoMapper</a>
-                    </li>
-                    
-                </ul>
-            </div>
-            <div class="flex items-center gap-6">
-                <a class="button bg-blue-900 text-white px-5 py-2 rounded-full hover:bg-[#87acec]" href="/logout/">Logout</a>
-                <ion-icon onclick="onToggleMenu(this)" name="menu" class="text-3xl cursor-pointer md:hidden text-black"></ion-icon>
-            </div>
-    </header>
+    {% if user.is_authenticated %}
+    {% include 'Header_medpred.html' %}
     <!-- Background image -->
     <div class="bg-[url('/static/bg_img2.jpg')] bg-cover h-screen flex justify-center" id="bgimg">
-        
+
         <form action="/medscan/result/" method="POST" id="myForm" class="flex justify-center">
             {%csrf_token%}
             <input type="hidden" id="symInput" name="symptoms" value="">
 
-    <!-- Submit button -->
-    <!-- <button type="button" onclick="submitForm()">Submit</button> -->
-</form>
+            <!-- Submit button -->
+            <!-- <button type="button" onclick="submitForm()">Submit</button> -->
+        </form>
         <div class="mt-24 w-96 sm:72 rounded-xl backdrop-blur-xl h-5/6 pt-12 mr-5">
             <div class="ml-10 text-white">
                 <p class="text-5xl mb-3">Select Symptoms</p>
-                
-                    <!-- <ul>
+
+                <!-- <ul>
                         <li><label for="itching" class="text-xl">Itching? </label><input type="radio" name="itching" value='1'>Yes <input type="radio" name="itching" value='0'>No</li>
                         <li><label for="skin_rash" class="text-xl">Skin Rash? </label><input type="radio" name="skin_rash" value='1'>Yes <input type="radio" name="skin_rash" value='0'>No</li>
                         <li><label for="continuous_sneezing" class="text-xl">Continuous Sneezing? </label><input type="radio" name="continuous_sneezing" value='1'>Yes <input type="radio" name="continuous_sneezing" value='0'>No</li>
@@ -114,7 +47,7 @@
                         <li><label for="muscle_pain" class="text-xl">Muscle Pain? </label><input type="radio" name="muscle_pain" value='1'>Yes <input type="radio" name="muscle_pain" value='0'>No</li>
                         <li><label for="sweating" class="text-xl">Sweating? </label><input type="radio" name="sweating" value='1'>Yes <input type="radio" name="sweating" value='0'>No</li>
                     </ul> -->
-                
+
                 <ul id="selecting" class="flex text-2xl justify-left flex-wrap">
                     <li><button id="symp" class="">itching</button></li>
                     <li><button id="symp" class="">skin_rash</button></li>
@@ -132,71 +65,64 @@
                     <li><button id="symp" class="">muscle_pain</button></li>
                     <li><button id="symp" class="">sweating</button></li>
                 </ul>
-                <button type="button" onclick="submitForm()" class="text-black rounded-full bg-white text-xl font-bold mt-4 px-7 py-2 click:bg-slate-200">Submit</button>
+                <button type="button" onclick="submitForm()"
+                    class="text-black rounded-full bg-white text-xl font-bold mt-4 px-7 py-2 click:bg-slate-200">Submit</button>
 
             </div>
         </div>
-    </form>
-    <footer class="white-section" id="footer">
-        <div class="container-fluid text-center">
-          <p>© Copyright 2024 Med Assist</p>
-        </div>
-    </footer>
+        </form>
         <!-- Card -->
         <div class="mt-24 w-2/5 sm:w-2/5 rounded-xl backdrop-blur-xl h-5/6 pt-12 ml-5">
-             Header 
+            Header
             <div class="ml-10 text-3xl text-white">
                 <p class="text-5xl mb-3">Selected Symptoms</p>
                 <ul id="selected" class="flex text-2xl justify-left flex-wrap">
-                    
+
                 </ul>
             </div>
-             Content 
+            Content
             <div class="px-10 mt-5">
             </div>
         </div>
     </div>
     <script>
-        let sym=[];
-        let selected=document.querySelector('#selected');
-        let selecting=document.querySelector('#selecting');
-        selecting.addEventListener("click", function(event){        
-            let adding=document.createElement('li');
-            adding.innerText=event.target.innerText;
+        let sym = [];
+        let selected = document.querySelector('#selected');
+        let selecting = document.querySelector('#selecting');
+        selecting.addEventListener("click", function (event) {
+            let adding = document.createElement('li');
+            adding.innerText = event.target.innerText;
             adding.setAttribute('id', 'symp');
             selected.appendChild(adding);
             sym.push(event.target.innerText);
             event.target.remove();
         })
-        selected.addEventListener("click", function(event){        
-            let adding=document.createElement('li');
-            adding.innerText=event.target.innerText;
+        selected.addEventListener("click", function (event) {
+            let adding = document.createElement('li');
+            adding.innerText = event.target.innerText;
             adding.setAttribute('id', 'symp');
-            for(let i=0; i<sym.length; i++){
-                if(sym[i]==adding.innerText) sym.splice(i, 1);
+            for (let i = 0; i < sym.length; i++) {
+                if (sym[i] == adding.innerText) sym.splice(i, 1);
             }
             selecting.appendChild(adding);
             event.target.remove();
         })
-                console.log(sym)
-                function submitForm() {
+        console.log(sym)
+        function submitForm() {
             // Get the 'sym' list values
             // var symList = ['symptom1', 'symptom2', 'symptom3'];  // Replace with your actual list
-    
+
             // Update the hidden input with the 'sym' values
             document.getElementById('symInput').value = JSON.stringify(sym);
-    
+
             // Submit the form
             document.getElementById('myForm').submit();
         }
     </script>
+    {% include 'Footer_medpred.html' %}
     {%else%}
-    <div class="container error404">
-        <div class="error-code">404</div>
-        <div class="error-message">Page Not Found</div>
-        <p>Sorry, the page you are looking for might be in another castle.</p>
-        <a href="/" class="back-home">Back to Home</a>
-    </div>
+    {% include 'error_message.html' %}
     {%endif%}
 </body>
-</html>
+
+{% endblock content %}

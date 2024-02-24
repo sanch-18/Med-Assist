@@ -1,61 +1,26 @@
+{% extends "base_medpred.html" %}
+
 {% load static %}
 
-<!DOCTYPE html>
-<html lang="en">
+{% block title %}
+    MedAssist | Your medical assistant
+{% endblock %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
-    <link rel="stylesheet" href="{% static 'introduction_css/style.css' %}">
-</head>
+{% block content %}
+
+<link rel="stylesheet" href="{% static 'medpred/Header.css' %}">
+<link rel="stylesheet" href="{% static 'introduction_css/style.css' %}">
+<link rel="stylesheet" href="{% static 'medpred/Footer.css' %}">
 
 <body>
     <!-- Navbar -->
-    <header class="bg-gradient-to-r from-cyan-500 to-blue-500">
-        <nav class="flex justify-between items-center w-[92%]  mx-auto">
-            <div class="text-2xl text-slate-100 my-2 font-bold">
-                Med Assist
-            </div>
-            <div
-                class="nav-links duration-500 md:static absolute md:min-h-fit min-h-[60vh] left-0 top-[-100%] md:w-auto w-full flex items-center px-5">
-                <ul class="flex md:flex-row flex-col md:items-center md:gap-[4vw] gap-8 text-white">
-                    {% if user.is_authenticated %}
-
-                    <li>
-                        <a class="hover:text-gray-500 text-white font-bold" href="/medpred">MedPred</a>
-                    </li>
-                    <li>
-                        <a class="hover:text-gray-500 text-white font-bold" href="/medscan/">MedScan</a>
-                    </li>
-                    <li>
-                        <a class="hover:text-gray-500 text-white font-bold" href="#">Dashboard</a>
-                    </li>
-                    <li>
-                        <a class="hover:text-gray-500 text-white font-bold" href="#">GeoMapper</a>
-                        <a href="/logout"
-                            class="button bg-blue-900 text-white px-5 py-2 rounded-full hover:bg-[#87acec]">Logout</a>
-                    </li>
-                    {% else %}
-                    <div class="flex items-center gap-6">
-                        <a href="/login"
-                            class="button bg-blue-900 text-white px-5 py-2 rounded-full hover:bg-[#87acec]">Login</a>
-                            <a href="/signup"
-                            class="button bg-blue-900 text-white px-5 py-2 rounded-full hover:bg-[#87acec]">Signup</a>
-                            
-                        <ion-icon onclick="onToggleMenu(this)" name="menu"
-                            class="text-3xl cursor-pointer md:hidden text-black"></ion-icon>
-                    </div>
-                    {% endif %}
-
-                </ul>
-            </div>
-    </header>
+    {% if user.is_authenticated %}
+        {% include 'Header_medpred.html' %}
+    {% else %}
+        {% include 'header_authenticate.html' %}
+    {% endif %}
     <!-- Background image -->
     <div class="bg-[url('/static/bg_img2.jpg')] bg-cover h-screen flex justify-center" id="bgimg">
-
-
-
 
         <!-- Card -->
         <div class="mt-20 w-96 sm:w-4/5 rounded-xl backdrop-blur-xl h-4/6 pt-16">
@@ -94,6 +59,7 @@
             </div>
         </div>
     </div>
+    {% include 'Footer_medpred.html' %}
 </body>
 
-</html>
+{% endblock content %}

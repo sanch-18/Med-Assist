@@ -14,6 +14,7 @@
 <link rel="stylesheet" href="{% static 'medpred/Home.css' %}">
 
 <body>
+  {% if user.is_authenticated %}
   {% include 'Header_medpred.html' %}
 
     <!-- TITLE AND CARDS -->
@@ -54,7 +55,10 @@
       </div>
     </div>
 
-  {% include 'Footer_medpred.html' %}
+    {% include 'Footer_medpred.html' %}
+    {%else%}
+    {% include 'error_message.html' %}
+    {%endif%}
 
 </body>
 

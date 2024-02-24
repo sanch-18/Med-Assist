@@ -14,7 +14,7 @@
 
 <body>
   <!-- NAVBAR -->
-
+  {% if user.is_authenticated %}
   {% include 'Header_medpred.html' %}
   
   <section class="py-5 text-center container">
@@ -87,6 +87,9 @@
   </div><br><br>
 
   {% include 'Footer_medpred.html' %}
+  {%else%}
+  {% include 'error_message.html' %}
+  {%endif%}
 
 </body>
 

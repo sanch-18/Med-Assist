@@ -103,12 +103,7 @@
   </div>
   {% include 'Footer_medpred.html' %}
   {%else%}
-    <div class="container error404">
-      <div class="error-code">404</div>
-      <div class="error-message">Page Not Found</div>
-      <p>Sorry, the page you are looking for might be in another castle.</p>
-      <a href="/" class="back-home">Back to Home</a>
-    </div>
+  {% include 'error_message.html' %}
   {%endif%}
 
 </body>
