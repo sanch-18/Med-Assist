@@ -23,7 +23,7 @@
         <a class="{% if request.path == '/#/' %} active {% endif %} nav-link" href="#">GeoMapper</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="/medpred/contact">Contact</a>
+        <a class="{% if request.path == '/medpred/contact/' %} active {% endif %} nav-link" href="/medpred/contact">Contact</a>
       </li>
       <a href="/logout" class="button nav-link text-black bg-white">Logout</a>
     </ul>
