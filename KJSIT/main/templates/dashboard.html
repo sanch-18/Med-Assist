@@ -1,0 +1,28 @@
+{% extends "base_medpred.html" %}
+
+{% load static %}
+
+{% block title %}
+MedPred | Test for diseases in the most effective way
+{% endblock %}
+
+{% block content %}
+
+<link rel="stylesheet" href="{% static 'medpred/Header.css' %}">
+<link rel="stylesheet" href="{% static 'medpred/Home.css' %}">
+<link rel="stylesheet" href="{% static 'medpred/Footer.css' %}">
+
+<body style="min-height:100vh; display:flex; flex-direction: column;">
+
+    {% if user.is_authenticated %}
+    {% include 'Header_medpred.html' %}
+
+              
+    {% include 'Footer_medpred.html' %}
+    {%else%}
+    {% include 'error_message.html' %}
+    {%endif%}
+
+</body>
+
+{% endblock content %}

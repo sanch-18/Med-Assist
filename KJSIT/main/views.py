@@ -23,6 +23,9 @@ def intro(request):
 def home(request):
     return render(request, 'home.html')
 
+def dashboard(request):
+    return render(request, 'dashboard.html')
+
 # Create your views here.
 def handlesignup(request):
     if request.method=='POST':
@@ -31,11 +34,6 @@ def handlesignup(request):
         username=request.POST.get('username')
         email=request.POST.get('email')
         pass1=request.POST.get('pass1')
-        # bio=request.POST['bio']
-        
-        # website=request.POST['website']
-        # achievements=request.POST['achievements']
-        # category=request.POST['category']
         myuser=User.objects.create_user(username, email, pass1)
         myuser.first_name=fname
         myuser.last_name=lname
@@ -58,7 +56,6 @@ def userlogin(request):
             messages.success(request, "Logged In!")
             return redirect("intro")
         else:
-            # print("kjpjjoio")
             messages.error(request, "Invalid Credentials, please try again")
             return redirect("login")
     # print("not posted in")
