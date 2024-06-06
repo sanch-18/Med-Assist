@@ -54,21 +54,21 @@ def userlogin(request):
         user=authenticate(username=loginusername,password=loginpass)
         if user is not None:
             login(request, user)
-            print("user is logged in")
+            # print("user is logged in")
             messages.success(request, "Logged In!")
             return redirect("intro")
         else:
-            print("kjpjjoio")
+            # print("kjpjjoio")
             messages.error(request, "Invalid Credentials, please try again")
             return redirect("login")
-    print("not posted in")
+    # print("not posted in")
     return render(request, 'login.html')
 
 def userlogout(request):
     user=request.user
-    print(f"{user} logged in is logged out")
+    # print(f"{user} logged in is logged out")
     logout(request)
-    print("oioiiooioioio")
+    # print("oioiiooioioio")
     messages.success(request, "Successfully logged out!")
     return redirect("intro")
 
@@ -224,7 +224,6 @@ def covid_result(request):
     
 
 def medscentry(request):
-    
     return render(request, 'medScan_low.html')
 
 def medscresults(request):
@@ -344,21 +343,21 @@ def medscresults(request):
                     stri=''
             elif parent_count%2==1:
                 stri+=symptom
-        print(f'itching: {itching}')
-        print(f'skin_rash: {skin_rash}')
-        print(f'continuous_sneezing: {continuous_sneezing}')
-        print(f'shivering: {shivering}')
-        print(f'joint_pain: {joint_pain}')
-        print(f'vomiting: {vomiting}')
-        print(f'cough: {cough}')
-        print(f'breathlessness: {breathlessness}')
-        print(f'sweating: {sweating}')
-        print(f'headache: {headache}')
-        print(f'nausea: {nausea}')
-        print(f'chills: {chills}')
-        print(f'diarrhoea: {diarrhoea}')
-        print(f'chest_pain: {chest_pain}')
-        print(f'muscle_pain: {muscle_pain}')
+        # print(f'itching: {itching}')
+        # print(f'skin_rash: {skin_rash}')
+        # print(f'continuous_sneezing: {continuous_sneezing}')
+        # print(f'shivering: {shivering}')
+        # print(f'joint_pain: {joint_pain}')
+        # print(f'vomiting: {vomiting}')
+        # print(f'cough: {cough}')
+        # print(f'breathlessness: {breathlessness}')
+        # print(f'sweating: {sweating}')
+        # print(f'headache: {headache}')
+        # print(f'nausea: {nausea}')
+        # print(f'chills: {chills}')
+        # print(f'diarrhoea: {diarrhoea}')
+        # print(f'chest_pain: {chest_pain}')
+        # print(f'muscle_pain: {muscle_pain}')
 
         # itching = int(request.POST['itching'])
         # skin_rash = int(request.POST['skin_rash'])
