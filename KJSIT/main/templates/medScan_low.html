@@ -12,47 +12,106 @@ MedPred | Test for diseases in the most effective way
 <link rel="stylesheet" href="{% static 'medScan_low_css/index-35QkwXAN.css' %}">
 <link rel="stylesheet" href="{% static 'medpred/Footer.css' %}">
 
-<body style ="min-height:100vh; display:flex; flex-direction: column;">
+<body
+    style="min-height:100vh; display:flex; flex-direction: column; background-image: url('{% static 'medScan_low_css/bg_img2.jpg' %}'); background-size: cover; background-position: center center;">
     <!-- Navbar -->
     {% if user.is_authenticated %}
     {% include 'Header_medpred.html' %}
     <!-- Background image -->
-    <div class="bg-[url('/static/bg_img2.jpg')] bg-cover min-h-screen flex justify-center items-center" id="bgimg">
+    <div class="py-2" style="margin: auto;">
+        <div class="py-4">
+            <h1 class="big-heading" id="typewriter" style="color: azure;"></h1>
+            <script>
+                const words = ["WELCOME TO MedScan"];
+                let i = 0;
+                let j = 0;
+                let currentWord = "";
+                let isDeleting = false;
 
-        <form action="/medscan/result/" method="POST" id="myForm" class="flex flex-col md:flex-row justify-center items-center w-full md:w-4/5 lg:w-3/5 p-5">
+                function type() {
+                    currentWord = words[i];
+                    document.getElementById("typewriter").textContent = currentWord.substring(0, j + 1);
+                    j++;
+                    setTimeout(type, 100);
+                }
+
+                type();
+            </script><br>
+        </div>
+    </div>
+
+
+    <div class="flex justify-center items-center" id="bgimg"
+        style="flex: 1; display: flex; justify-content: center; align-items: center;">
+
+        <form action="/medscan/result/" method="POST" id="myForm"
+            class="flex flex-col flex-wrap md:flex-row justify-center items-center w-full md:w-4/5 lg:w-3/5 p-5 space-y-4 md:space-y-0 md:space-x-4">
             {% csrf_token %}
             <input type="hidden" id="symInput" name="symptoms" value="">
 
             <!-- Symptoms Selection Card -->
-            <div class="w-full md:w-1/2 lg:w-1/3 rounded-xl backdrop-blur-xl h-5/6 p-6 mb-4 md:mb-0 md:mr-4 bg-opacity-50 bg-black">
-                <div class="text-white">
+            <div class="w-full md:w-1/2 lg:w-1/3 rounded-xl backdrop-blur-xl h-5/6 p-6 bg-opacity-50 bg-black">
+                <div class="text-white text-center">
                     <p class="text-3xl md:text-4xl lg:text-5xl mb-3">Select Symptoms</p>
-                    <ul id="selecting" class="flex flex-wrap text-lg md:text-xl justify-left space-x-2 space-y-2">
-                        <li><button type="button" id="symp" class="bg-white text-black px-3 py-1 rounded">itching</button></li>
-                        <li><button type="button" id="symp" class="bg-white text-black px-3 py-1 rounded">skin_rash</button></li>
-                        <li><button type="button" id="symp" class="bg-white text-black px-3 py-1 rounded">continuous_sneezing</button></li>
-                        <li><button type="button" id="symp" class="bg-white text-black px-3 py-1 rounded">shivering</button></li>
-                        <li><button type="button" id="symp" class="bg-white text-black px-3 py-1 rounded">chills</button></li>
-                        <li><button type="button" id="symp" class="bg-white text-black px-3 py-1 rounded">joint_pain</button></li>
-                        <li><button type="button" id="symp" class="bg-white text-black px-3 py-1 rounded">cough</button></li>
-                        <li><button type="button" id="symp" class="bg-white text-black px-3 py-1 rounded">vomiting</button></li>
-                        <li><button type="button" id="symp" class="bg-white text-black px-3 py-1 rounded">headache</button></li>
-                        <li><button type="button" id="symp" class="bg-white text-black px-3 py-1 rounded">chest_pain</button></li>
-                        <li><button type="button" id="symp" class="bg-white text-black px-3 py-1 rounded">breathlessness</button></li>
-                        <li><button type="button" id="symp" class="bg-white text-black px-3 py-1 rounded">nausea</button></li>
-                        <li><button type="button" id="symp" class="bg-white text-black px-3 py-1 rounded">diarrhoea</button></li>
-                        <li><button type="button" id="symp" class="bg-white text-black px-3 py-1 rounded">muscle_pain</button></li>
-                        <li><button type="button" id="symp" class="bg-white text-black px-3 py-1 rounded">sweating</button></li>
+                    <ul id="selecting"
+                        class="list-none p-0 m-0 flex flex-wrap text-lg md:text-xl justify-start space-x-2 space-y-2">
+                        <li class="list-none"><button type="button"
+                                class="bg-white text-black px-4 py-2 rounded-full hover:bg-gray-200 transition-all m-1">itching</button>
+                        </li>
+                        <li class="list-none"><button type="button"
+                                class="bg-white text-black px-4 py-2 rounded-full hover:bg-gray-200 transition-all m-1">skin
+                                rash</button></li>
+                        <li class="list-none"><button type="button"
+                                class="bg-white text-black px-4 py-2 rounded-full hover:bg-gray-200 transition-all m-1">continuous
+                                sneezing</button></li>
+                        <li class="list-none"><button type="button"
+                                class="bg-white text-black px-4 py-2 rounded-full hover:bg-gray-200 transition-all m-1">shivering</button>
+                        </li>
+                        <li class="list-none"><button type="button"
+                                class="bg-white text-black px-4 py-2 rounded-full hover:bg-gray-200 transition-all m-1">chills</button>
+                        </li>
+                        <li class="list-none"><button type="button"
+                                class="bg-white text-black px-4 py-2 rounded-full hover:bg-gray-200 transition-all m-1">joint
+                                pain</button></li>
+                        <li class="list-none"><button type="button"
+                                class="bg-white text-black px-4 py-2 rounded-full hover:bg-gray-200 transition-all m-1">cough</button>
+                        </li>
+                        <li class="list-none"><button type="button"
+                                class="bg-white text-black px-4 py-2 rounded-full hover:bg-gray-200 transition-all m-1">vomiting</button>
+                        </li>
+                        <li class="list-none"><button type="button"
+                                class="bg-white text-black px-4 py-2 rounded-full hover:bg-gray-200 transition-all m-1">headache</button>
+                        </li>
+                        <li class="list-none"><button type="button"
+                                class="bg-white text-black px-4 py-2 rounded-full hover:bg-gray-200 transition-all m-1">chest
+                                pain</button></li>
+                        <li class="list-none"><button type="button"
+                                class="bg-white text-black px-4 py-2 rounded-full hover:bg-gray-200 transition-all m-1">breathlessness</button>
+                        </li>
+                        <li class="list-none"><button type="button"
+                                class="bg-white text-black px-4 py-2 rounded-full hover:bg-gray-200 transition-all m-1">nausea</button>
+                        </li>
+                        <li class="list-none"><button type="button"
+                                class="bg-white text-black px-4 py-2 rounded-full hover:bg-gray-200 transition-all m-1">diarrhoea</button>
+                        </li>
+                        <li class="list-none"><button type="button"
+                                class="bg-white text-black px-4 py-2 rounded-full hover:bg-gray-200 transition-all m-1">muscle
+                                pain</button></li>
+                        <li class="list-none"><button type="button"
+                                class="bg-white text-black px-4 py-2 rounded-full hover:bg-gray-200 transition-all m-1">sweating</button>
+                        </li>
                     </ul>
-                    <button type="button" onclick="submitForm()" class="bg-white text-black text-lg font-bold mt-4 px-6 py-2 rounded-xl ">Submit</button>
+                    <button type="button" onclick="submitForm()"
+                        class="bg-white text-black text-lg font-bold mt-4 px-6 py-2  hover:bg-gray-200 transition-all">Submit</button>
                 </div>
             </div>
 
             <!-- Selected Symptoms Card -->
-            <div class="w-full md:w-1/2 lg:w-1/3 rounded-xl backdrop-blur-xl h-5/6 p-6 bg-opacity-50 bg-black">
-                <div class="text-white">
+            <div class="w-full md:w-1/2 lg:w-1/3 rounded-xl backdrop-blur-xl h-5/6 p-6 bg-opacity-50 bg-black my-4">
+                <div class="text-white text-center">
                     <p class="text-3xl md:text-4xl lg:text-5xl mb-3">Selected Symptoms</p>
-                    <ul id="selected" class="flex flex-wrap text-lg md:text-xl justify-left space-x-2 space-y-2">
+                    <ul id="selected"
+                        class="list-none p-0 m-0 flex flex-wrap text-lg md:text-xl justify-start space-x-2 space-y-2">
                         <!-- Selected symptoms will appear here -->
                     </ul>
                 </div>
@@ -65,22 +124,22 @@ MedPred | Test for diseases in the most effective way
         let selected = document.querySelector('#selected');
         let selecting = document.querySelector('#selecting');
 
-        selecting.addEventListener("click", function(event) {
+        selecting.addEventListener("click", function (event) {
             if (event.target.tagName === 'BUTTON') {
                 let adding = document.createElement('li');
                 adding.innerText = event.target.innerText;
-                adding.setAttribute('id', 'symp');
+                adding.className = "bg-white text-black px-4 py-2 rounded-full hover:bg-gray-200 transition-all m-1 list-none";
                 selected.appendChild(adding);
                 sym.push(event.target.innerText);
                 event.target.remove();
             }
         });
 
-        selected.addEventListener("click", function(event) {
+        selected.addEventListener("click", function (event) {
             if (event.target.tagName === 'LI') {
                 let adding = document.createElement('li');
                 adding.innerText = event.target.innerText;
-                adding.setAttribute('id', 'symp');
+                adding.className = "bg-white text-black px-4 py-2 rounded-full hover:bg-gray-200 transition-all m-1 list-none";
                 for (let i = 0; i < sym.length; i++) {
                     if (sym[i] == adding.innerText) sym.splice(i, 1);
                 }
@@ -93,6 +152,7 @@ MedPred | Test for diseases in the most effective way
             document.getElementById('symInput').value = JSON.stringify(sym);
             document.getElementById('myForm').submit();
         }
+
     </script>
 
     {% include 'Footer_medpred.html' %}
