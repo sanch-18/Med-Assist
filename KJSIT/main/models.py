@@ -12,28 +12,9 @@ class Person(models.Model):
     def __str__(self):
         return str(self.username) 
 
-# class Job(models.Model):
-#     covid=models.FileField()
-#     heart=models.FileField()
-#     cancer=models.FileField()
-#     diabetes=models.FileField()
-
 class Contact_info(models.Model):
     name = models.CharField(max_length=30)
     email = models.EmailField()
     Query = models.TextField()
     def __str__(self):
         return self.name
-
-'''
-class Covid:
-    
-
-class Cancer:
-
-class Heart:
-
-class Diabetes:
-
-class Skin:
-'''
