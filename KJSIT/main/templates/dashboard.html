@@ -18,36 +18,40 @@ MedPred | Test for diseases in the most effective way
     {% if user.is_authenticated %}
     {% include 'Header_medpred.html' %}
     
-    <div class="card">
-        <div class="card-body">
-            <p class="card-title">26/11/2024 - 5:35</p>
-            <h3 class="card-title">You used MedPred</h5>
-            <b class="card-text">You performed test for Breast Cancer. You were Predicted Negative with a probability of 56%.</b>
-            <p>Your Symptoms were : </p>
-            <ol>
-                <li>Travelled - Yes</li>
-                <li>Travelled - Yes</li>
-                <li>Travelled - Yes</li>
-                <li>Travelled - Yes</li>
-            </ol>
+    <!-- <h1>{{ x }}</h1> -->
+    {% if size == 0 %}
+        <div class="container mt-5">
+            <div class="row justify-content-center">
+                <div class="col-md-6">
+                    <div class="alert alert-info text-center" role="alert">
+                        You have no previous History
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
+    {% endif %}
+    
+    {% for record in records %}
+        {% if record.1 == 'MedPred' %}
+            <div class="card">
+                <div class="card-body">
+                    <p class="card-title">{{record.0}}</p>
+                    <h3 class="card-title">You used {{record.1}}</h5>
+                    <p class="card-text">You performed test for {{record.2}}. You were Predicted {{record.3}} with a probability of {{record.4}}%.</p>
+                </div>
+            </div>
+        {% else %}
+            <div class="card">
+                <div class="card-body">
+                    <p class="card-title">{{record.0}}</p>
+                    <h3 class="card-title">You used {{record.1}}</h5>
+                    <p class="card-text">You were predicted {{record.3}} for {{record.2}}</p>
+                </div>
+            </div>
+        {% endif %}
 
-    <div class="card">
-        <div class="card-body">
-            <p class="card-title">23/03/2024 - 20:09</p>
-            <h5 class="card-title">You used MedScan</h5>
-            <p class="card-text">Your Disease was predicted as Malaria.</p>
-        </div>
-    </div>
 
-    <div class="card">
-        <div class="card-body">
-            <p class="card-title">26/11/2024 - 5:35</p>
-            <h5 class="card-title">You used MedPred</h5>
-            <p class="card-text">You performed test for Breast Cancer. You were Predicted Negative with a probability of 56%.</p>
-        </div>
-    </div>
+    {% endfor %}
 
     {% include 'Footer_medpred.html' %}
     {%else%}

@@ -4,7 +4,8 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate,login,logout
 from joblib import load
 
-from .models import Person, Contact_info
+from .models import Person, Contact_info, History
+from .data_conversion import conversion
 
 
 covid_model = load('./main/Models/Covid.joblib')
@@ -13,10 +14,6 @@ diabetes_model=load('./main/Models/Diabetes.joblib')
 breast_cancer_model=load('./main/Models/Breast-Cancer.joblib')
 low_end_model = load('./main/Models/Low_End.joblib')
 
-# def medscentry(request):
-#     return render(request, 'medScan_low.html')
-
-
 def intro(request):
     return render(request, 'introduction.html')
 
@@ -24,9 +21,10 @@ def home(request):
     return render(request, 'home.html')
 
 def dashboard(request):
-    return render(request, 'dashboard.html')
+    user = request.user
+    hist = History.objects.filter(person=user).values()
+    return render(request, 'dashboard.html', conversion(hist))
 
-# Create your views here.
 def handlesignup(request):
     if request.method=='POST':
         fname=request.POST.get('fname')
@@ -41,7 +39,15 @@ def handlesignup(request):
         profile=Person(username=username, email=email)
         profile.save()
         messages.success(request, "Your account has been created successfully")
-        return redirect('login')
+        user=authenticate(username=username,password=pass1)
+        if user is not None:
+            login(request, user)
+            # print("user is logged in")
+            messages.success(request, "Logged In!")
+            return redirect("intro")
+        else:
+            messages.error(request, "Invalid Credentials, please try again")
+            return redirect("login")
     return render(request, 'signup.html')
 
 def userlogin(request):
@@ -118,6 +124,7 @@ def diabetes_result(request):
         features=[gender,age,hypertension, heart_disease,bmi, hba, glucose, current, ever, former, never, noinfo]
         y_pred = diabetes_model.predict([features])[0]
         diabetes_prob=diabetes_model.predict_proba([features])[0]
+        prob = 0
         if y_pred==0:
             result_diabetes="You have Diabetes"
             prob = round(diabetes_prob[0]*100, 2)
@@ -129,7 +136,14 @@ def diabetes_result(request):
             prob = round(diabetes_prob[1]*100, 2)
             if prob>80:
                 disease="Congratulations! You're safe and healthy"
-
+        resu = ''
+        if(y_pred==0):
+            resu = 'positive'
+        else:
+            resu = 'negative'
+        user = request.user
+        ins = History(app= "MedPred", disease="diabetes", result= resu, probability = prob, person=user)
+        ins.save()
         return render(request, 'result.html',{'result':result_diabetes, 'probability': prob, 'disea':disease})
 
 def heart_result(request):
@@ -149,6 +163,7 @@ def heart_result(request):
         array=[age, gender,chestpain, Blood_Pressure, cholesterol,0,0, heart_rate, angina, st,0, vessels,thal]
         y_pred = heart_disease_model.predict([array])[0]
         heart_prob = heart_disease_model.predict_proba([array])[0]
+        prob = 0
         if y_pred==0:
             result_heart="You don't have Heart Disease"
             prob = round(heart_prob[0]*100, 2)
@@ -160,6 +175,14 @@ def heart_result(request):
             if prob>80:
                 disease="We advice you to consult a doctor and get yourself checked immediately"
 
+        resu = ''
+        if(y_pred==0):
+            resu = 'positive'
+        else:
+            resu = 'negative'
+        user = request.user
+        ins = History(app= "MedPred", disease="Covid", result= resu, probability = prob, person=user)
+        ins.save()
         return render(request, 'result.html',{'result':result_heart, 'probability': prob, 'disea': disease})
 
 def cancer_result(request):
@@ -176,6 +199,7 @@ def cancer_result(request):
         predictors = [0,texture_mean,0, 0, 0, 0,0,0,0,0,0,0,0,mean_cell_area_rate,0, cell_compactness,0,0,0,0,0,0, worst_cell_texture_rate,0, worst_cell_area_rate, worst_cell_smooth_rate,0, worst_cell_concavity, worst_concave_points,0]
         y_pred = breast_cancer_model.predict([predictors])[0]
         cancer_prob = breast_cancer_model.predict_proba([predictors])[0]
+        prob = 0
         if y_pred == 0:
             result_cancer="You don't have Breast Cancer"
             prob=round(cancer_prob[0]*100, 2)
@@ -187,6 +211,14 @@ def cancer_result(request):
             if prob>80:
                 disease="We advice you to consult a doctor and get yourself checked immediately"
 
+        resu = ''
+        if(y_pred==0):
+            resu = 'positive'
+        else:
+            resu = 'negative'
+        user = request.user
+        ins = History(app= "MedPred", disease="Covid", result= resu, probability = prob, person=user)
+        ins.save()
         return render(request, 'result.html',{'result': result_cancer, "probability": prob, 'disea':disease})
 
 def covid_result(request):
@@ -206,6 +238,7 @@ def covid_result(request):
         features =[Gender, age, fever, cough, runnynose, musclesore, Pneumonia, Diarrhea, Lung, travel,0]
         y_pred = covid_model.predict([features])[0]
         covid_prob=covid_model.predict_proba([features])[0]
+        prob = 0
         if y_pred == 0:
             result_covid = "You don't have Covid-19 disease"
             prob = round(covid_prob[0]*100, 2)
@@ -216,7 +249,14 @@ def covid_result(request):
             prob = round(covid_prob[1]*100, 2)
             if prob>80:
                 disease="We advice you to consult a doctor and get yourself checked immediately"
-
+        resu = ''
+        if(y_pred==0):
+            resu = 'positive'
+        else:
+            resu = 'negative'
+        user = request.user
+        ins = History(app= "MedPred", disease="Covid", result= resu, probability = prob, person=user)
+        ins.save()
         return render(request, 'result.html', {'result' : result_covid, 'probability':prob, 'disea':disease})
     
 
@@ -375,6 +415,11 @@ def medscresults(request):
         features = [itching, skin_rash, 0, continuous_sneezing, shivering, chills, joint_pain, 0, 0, 0, 0, vomiting, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, cough, 0, 0, breathlessness, sweating, 0, 0, headache, 0, 0, nausea, 0, 0, 0, 0, 0, diarrhoea, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, chest_pain, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, muscle_pain, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
         y_pred = low_end_model.predict([features])[0]
         index = diseases.index(y_pred)
+        
+        resu = 'positive'
+        user = request.user
+        ins = History(app= "MedScan", disease=y_pred, result= resu, probability = 100, person=user)
+        ins.save()
 
         diseases_str = "Disease: " + y_pred
         symptoms_str = "Symptoms: " + symptoms[index][0] + ", " + symptoms[index][1] + ", " + symptoms[index][2]
